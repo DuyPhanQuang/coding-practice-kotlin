@@ -28,7 +28,7 @@ fun main() {
 //        intArrayOf(2, 3, -2, 4, -1),
     )
 
-    Running().twoSum(input[1], 18).also { u ->
+    Running().twoSum(input[1], 9).also { u ->
         println("v-->${u.toList()}")
     }
 }
