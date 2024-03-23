@@ -21,33 +21,45 @@ Input: nums = [3,3], target = 6
 Output: [3,3]
  */
 
-fun solution(arr: IntArray, target: Int):IntArray {
-    // initialize an hash map as `numIndices` is created to store the indices of elements encounter so far
-    // during the iteration.
-    // the keys of map represent the elements of the array and the values of map represent their indices.
-    val numIndices = HashMap<Int, Int>()
-    // we running a simple loop for iterate through the indices of arr
-    for (i in arr.indices) {
-        // calculate a temp need to reach the target by subtracting the current element from the target
-        val temp = target - arr[i]
+// sub-problem
+// iterate through the input array
+// calculate complement
+// check complement exist if it does, return value of indices elements
+// store indices in a data structure
+// repeat until solution found
 
-        // check if temp is found in numIndices, it means that there exists a pair of elements whose sum
-        // is equal to the target. in this case, should return an array containing the indices of two elements.
+// Certainly, let me break down solution
+// the main logic of this solution revolves around using a hashmap to efficiently find pairs of numbers
+// that sum up to the target.
+// - hash map for index storage: create a hash map is used to store the indices of elements encountered
+// while iterating through the array. this hash map will help in quickly determining if a complement
+// exists for the current element to react the target
+// - iteration through input array: running a loop and at each iteration, it calculate the complement need to achieve the target sum.
+// - checking for complement: for each element in array, check if the complement(the difference between
+// the target and current element) exist in the hashmap.if it does, it means there exists a pair of elements
+// whose sum is equal to the target. in this case, the function immediately return an array containing the value of these two elements.
+// - store element indices: otherwise, if the complement is not found in the hash map, it means the current
+// element have not been paired with any previous elements to reach the target yet. so the index of current element
+// is stored in the hash map with the element itself as the key.
+
+// time complexity: 0(n) where n is the number of elements in the input array
+// space complexity: 0(n) where n is the number of elements in the input array
+
+fun solution(arr: IntArray, target: Int): IntArray {
+    val numIndices = HashMap<Int, Int>()
+    for (i in arr.indices) {
+        val temp = target - arr[i]
         if (temp in numIndices) {
             return intArrayOf(arr[numIndices[temp]!!], arr[i])
         }
-        // otherwise, if the temp is not found,it means the current elements have not been pair with any
-        // previous elements to react the target yet, so the index of current elements is stored in the numIndices
-        // with the element itself as the key
         numIndices[arr[i]] = i
     }
 
-    // no pair of elements sum up to target
     return intArrayOf()
 }
 
 fun main() {
     println(solution(intArrayOf(2,7,11,15), 9).toList())
-    println(solution(intArrayOf(3,2,4), 6).toList())
-    println(solution(intArrayOf(3,3), 6).toList())
+//    println(solution(intArrayOf(3,2,4), 6).toList())
+//    println(solution(intArrayOf(3,3), 6).toList())
 }
