@@ -5,13 +5,29 @@ package grab
 For example, here are some correct splits of the string "abacdec": ('a', 'bac', 'dec'), ('a', bacd', 'ec') and ('ab', 'ac', 'dec').
 * */
 
+// the main logic is revolve around generating all possible splits of the input string into three substrings,
+// ensure that each substrings contains only unique characters.
+
+// Certainly, let break down solution step by step:
+// - nested loops for splitting: running nested loops to iterate over all possible pairs of indices(i,j)
+// where i and j represent the positions where the string will be split into three substrings.
+// the outer loop iterate over the starting index i and the inner loop iterate over the ending index j
+// these loops generate all possible splits of the input string
+// - extracting substrings: for each pair indices(i,j), three substrings are extract from the inputstring
+// these substrings represent three parts obtained after splitting the string at position i,j
+// - checking substring unique: check if each of three substrings contains only unique characters.
+// this function iterate through the characters of the substring and maintains a set of characters seen so far.
+// if it encounter a character that is already in the set, if return false indicating that the substring
+// does not have all unique characters.
+// - adding valid splits: if all  three substrings have unique characters, the current splits is considered valid,
+// and the three substrings are added to the list of valid splits.
+
+// time complexity: overall, is dominated by the nested loop, is approximately 0(n^2) where n is the length of input
+// space complexity: is 0(n^2) where n is the length of input
+
 // check whether all characters in the string are unique
 fun isUnique(s: String): Boolean {
     val seen = mutableSetOf<Char>()
-    // we iterate through each character in the string and check if it has been seen before
-    // if we encounter a character that is already in the set, it means the string does not have all
-    // unique characters, so return false
-    // if we iterate through the entire string without encounter any duplicate characters, so return true.
     for (char in s) {
         if (seen.contains(char)) {
             return false
@@ -22,17 +38,12 @@ fun isUnique(s: String): Boolean {
 }
 
 fun splitString(s: String): List<List<String>> {
-    // initialize an empty mutable list as name substrings to store the valid splits of input string
     val substrings = mutableListOf<List<String>>()
-    // use bruteforce ways for running nested loop to iterate overall possible indices i and j such that i is less than j
-    // these indices represent the positions where the string will be split into three substrigns
     for (i in 1 until s.length) {
         for (j in i + 1 until s.length) {
             val s1 = s.substring(0, i)
             val s2 = s.substring(i, j)
             val s3 = s.substring(j)
-            // check if each of three substrings extracted above contain only unique characters
-            // if all three substrings have unique characters, we consider it as a valid split and push it to the list of substrings
             val isValid = isUnique(s1) && isUnique(s2) && isUnique(s3)
             if (isValid) {
                 substrings.add(listOf(s1,s2,s3))

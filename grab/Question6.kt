@@ -63,5 +63,8 @@ fun plusOne(digits: IntArray): IntArray {
 
 fun main() {
     println(plusOne(intArrayOf(1, 2, 3)).toList())
+    println(plusOne(intArrayOf(1, 5, 9)).toList())
+    println(plusOne(intArrayOf(1, 9, 9)).toList())
+    println(plusOne(intArrayOf(9, 9, 9)).toList())
     println(plusOne(intArrayOf(0, 0, 0)).toList())
 }
