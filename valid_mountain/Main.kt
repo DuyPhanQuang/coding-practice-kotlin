@@ -1,10 +1,5 @@
 package valid_mountain
 
-fun main() {
-    val input: Array<Int> = arrayOf(1,2,3,4,7,6,5)
-    println("check valid mountain --> ${isValidMountain(input)}")
-}
-
 /* solution
  peak can not is first or last and mountain has at least 3 element.
  traversing from left to right
@@ -18,6 +13,9 @@ fun main() {
  *DOWN
  if peak presented at middle element, we running a loop from this position to check strictly decreasing order.
  if reach the end, input valid mountain, otherwise its not.
+
+ // time complexity: 0(n)
+ // space complexity: 0(1)
 
 * */
 fun isValidMountain(arr: Array<Int>): Boolean {
@@ -38,4 +36,9 @@ fun isValidMountain(arr: Array<Int>): Boolean {
     }
 
     return temp == arr.size-1
+}
+
+fun main() {
+    println(isValidMountain(arrayOf(1,2,3,4,5,4,3,7)))
+    println(isValidMountain(arrayOf(1,2,3,4,7,6,5)))
 }

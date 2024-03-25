@@ -15,27 +15,31 @@ Input: [0,2,1,0]
 Output: 1
 */
 
-fun solution(input: IntArray): Int {
-    if (input.size < 3) {
-        return 0
-    }
-    var seen = 0
-    while (seen < input.size - 1 && input[seen] < input[seen + 1]) {
-        seen++
-    }
-    if (seen == 0 || seen == input.size - 1) {
-        return 0
-    }
-    while (seen < input.size - 1 && input[seen] > input[seen + 1]) {
-        seen++
-    }
+/** the main logic of this solution to iterate through the input array and find the index
+ * of the peak element which satisfies the conditions of being a mountain
+ * Certainly, break down a solution step by step:
+ * 1. we initialize a peak index assuming is at the beginning of the input array.
+ * 2. we iterate through the input array has position i starting from 1 to n-1
+ * where n is the length of given input array.
+ * for each element at i, we compare it with the element at the current peak index.
+ * if element at i greater than element at peak, we need to update peak index to i.
+ * continue this process until the end of input array is reached.
+ * **/
 
-    return if (seen == input.size - 1) 1 else 0
+// time complexity: 0(n)
+// space complexity: 0(1)
+
+private fun solution(input: IntArray): Int {
+    var peak = 0
+    for (i in 1 until input.size) {
+        if (input[i] > input[peak]) {
+            peak = i
+        }
+    }
+    return peak
 }
 
 fun main() {
-    println(solution(intArrayOf(1,2,3,4,5,4,3,7)))
-    println(solution(intArrayOf(1,2,3,4,7,6,5)))
     println(solution(intArrayOf(0,1,0)))
     println(solution(intArrayOf(0,2,1,0)))
 }

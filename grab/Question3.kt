@@ -31,7 +31,13 @@ To take course 1 you should have finished course 0, and to take course 0 you sho
 // Implement DFS to visit each node and explore its neighbors.
 // Detect if a node is being visited during the traversal, indicating a cycle.
 
-// Certainly. Let's break down the solution step by step:
+// overall
+// Main Logic:
+// In the main function, we initialize an array to keep track of visited nodes and perform DFS traversal on each course.
+// If any DFS traversal returns false, indicating the presence of a cycle, we immediately return false, indicating that it's impossible to finish all courses.
+// If all DFS traversals complete without detecting any cycles, we return true, indicating that it's possible to finish all courses.
+
+// Certainly. break down the solution step by step:
 // 1. graph representation
 // the first step is to present the given prerequisites as a graph. we create adjacency list
 // representation of the graph. we use an array of mutable list to represent the adjacency list.
@@ -47,13 +53,6 @@ To take course 1 you should have finished course 0, and to take course 0 you sho
 // determined that there is no cycle starting from that course so we return true
 // otherwise, we mark the course as being visited, explore its prerequisites recursively and then mark it
 // as visited once the dfs traversal from that course complete.
-
-// overall
-// Main Logic:
-//
-// In the main function, we initialize an array to keep track of visited nodes and perform DFS traversal on each course.
-// If any DFS traversal returns false, indicating the presence of a cycle, we immediately return false, indicating that it's impossible to finish all courses.
-// If all DFS traversals complete without detecting any cycles, we return true, indicating that it's possible to finish all courses.
 
 // Time complexity: O(V + E)
 // Space complexity: O(V + E)

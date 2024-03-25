@@ -11,31 +11,43 @@ Examples:
 4. Given 'abba', your function should return 2. The result can be achieved by splitting the string into two substrings ('ab', 'ba').
  */
 
+/**
+ * the main logic of this solution revolves around using dynamic programming
+ * to find the minimum number of substrings need to cover the given string.
+ * - Certainly, break down the solution step by step:
+ * 1. we initialize an int array has size n + 1 where n is the length of given string.
+ * this array will store the minimum number of substrings need to cover each prefix of the string
+ * 2. we set an array at indices:0 = 0 to indicate that no splits are need to cover empty prefix
+ * 3. approach way for iteration: we running nested loop.
+ * outer loop we iterate over each position i starting from 1 to the length of given string
+ * inner loop we iterate all possible starting position j from 0 to i -1.
+ * outer loop: at each position i we aim to find minimum number of substrings need to cover the prefix
+ * ending at position i.
+ * inner loop: this represent all possible substrings endings at position i,
+ * for each substrings from j to i, we should check if it contains unique characters via
+ * comparing the lengths of substrings and the set.
+ * if the lengths are equal it means all characters are unique then we update an array at position i
+ */
+
+/**
+ * time complexity: 0(n^2)
+ * space complexity: 0(n)
+* */
+
 fun solution(s: String): Int {
-    // Initialize to maximum possible splits has size s.length + 1
-    // this arr will store the minimum number of substrings need to cover each prefix of s
     val dp = IntArray(s.length + 1)
-    // we iterate over each position i in the string s, starting from index = 1.
-    // at each position i, we aim to find the minimum number of substrings need to cover prefix ending at position i
-    // we running nested loop for each position i, we iterate over all possible starting position j (from 0 to i-1)
-    // this represent all possible substrings ending at position i.
     for (i in 1..s.length) {
         dp[i] = i
         for (j in 0 until i) {
-            val substring = s.substring(j, i)
-            // check if it contains unique characters.
-            // converting the substring to a set then comparing the length of set and the substring.
-            // if the length are equal, it means all characters in the substring are unique.
-            if (substring.toSet().size == substring.length) {
-                // we update dp[i] to be the minimum of its current value and dp[j]+1.
-                // dp[j]+1 represent the minimum number of substrings need to cover the prefix ending at position j
-                // plus one more substring for the current substring from j to i
-                dp[i] = minOf(dp[i], dp[j] + 1)
+            val substrings = s.substring(j,i)
+            // dp[j+1] represent minimum number of substrings need to cover prefix of ending
+            // at position j, plus one more substring for the current substrings from j to i
+            if (substrings.toSet().size == substrings.length) {
+                dp[i] = minOf(dp[i], dp[j]+1)
             }
         }
     }
 
-    // dp[s.length] represent the minimum number of substrings need to cover the entire input string.
     return dp[s.length]
 }
 

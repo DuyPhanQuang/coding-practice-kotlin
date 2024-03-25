@@ -13,7 +13,7 @@ For example, here are some correct splits of the string "abacdec": ('a', 'bac', 
 // where i and j represent the positions where the string will be split into three substrings.
 // the outer loop iterate over the starting index i and the inner loop iterate over the ending index j
 // these loops generate all possible splits of the input string
-// - extracting substrings: for each pair indices(i,j), three substrings are extract from the inputstring
+// - extracting substrings: for each pair indices(i,j), three substrings are extract from the input string
 // these substrings represent three parts obtained after splitting the string at position i,j
 // - checking substring unique: check if each of three substrings contains only unique characters.
 // this function iterate through the characters of the substring and maintains a set of characters seen so far.
@@ -22,7 +22,8 @@ For example, here are some correct splits of the string "abacdec": ('a', 'bac', 
 // - adding valid splits: if all  three substrings have unique characters, the current splits is considered valid,
 // and the three substrings are added to the list of valid splits.
 
-// time complexity: overall, is dominated by the nested loop, is approximately 0(n^2) where n is the length of input
+// time complexity: overall, is dominated by the nested loop,
+// is approximately 0(n^2) where n is the length of input
 // space complexity: is 0(n^2) where n is the length of input
 
 // check whether all characters in the string are unique
