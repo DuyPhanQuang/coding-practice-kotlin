@@ -5,57 +5,57 @@ package grab
 For example, here are some correct splits of the string "abacdec": ('a', 'bac', 'dec'), ('a', bacd', 'ec') and ('ab', 'ac', 'dec').
 * */
 
-// the main logic is revolve around generating all possible splits of the input string into three substrings,
-// ensure that each substrings contains only unique characters.
+// question type: Find minimum number of Substrings with unique characters
 
-// Certainly, let break down solution step by step:
-// - nested loops for splitting: running nested loops to iterate over all possible pairs of indices(i,j)
-// where i and j represent the positions where the string will be split into three substrings.
-// the outer loop iterate over the starting index i and the inner loop iterate over the ending index j
-// these loops generate all possible splits of the input string
-// - extracting substrings: for each pair indices(i,j), three substrings are extract from the input string
-// these substrings represent three parts obtained after splitting the string at position i,j
-// - checking substring unique: check if each of three substrings contains only unique characters.
-// this function iterate through the characters of the substring and maintains a set of characters seen so far.
-// if it encounter a character that is already in the set, if return false indicating that the substring
-// does not have all unique characters.
-// - adding valid splits: if all  three substrings have unique characters, the current splits is considered valid,
-// and the three substrings are added to the list of valid splits.
+// certainly, let's break down solution step by step:
+// we initialize an empty hashset to store unique characters and iterate through the given string
+// for each character encountered, we check if it's already present in the set
+// if it's, it means that we need to start new a substring since the current substring has repeated
+// character.
+// we increase our answer variable and clear the set to start a new substring
+// then we add the current character to the set.
+// after iterating through the entire string, the value of answer variable give us the minimum number
+// of substrings required to partition the given string such that each substring has unique characters.
 
-// time complexity: overall, is dominated by the nested loop,
-// is approximately 0(n^2) where n is the length of input
-// space complexity: is 0(n^2) where n is the length of input
-
-// check whether all characters in the string are unique
-fun isUnique(s: String): Boolean {
-    val seen = mutableSetOf<Char>()
-    for (char in s) {
-        if (seen.contains(char)) {
-            return false
+// Time Complexity: O(n) where n is the length of the input string.
+// Auxiliary Space: O(n) in the worst case
+// This is because we store each character of the input string in the hash set,
+// and in the worst case, all characters of the string are unique.
+private fun solution(s: String): Int {
+    val uniqueCharacters = hashSetOf<Char>()
+    var ans = 1
+    for (i in s.indices) {
+        // Check if the current character is already present in the set
+        if (uniqueCharacters.contains(s[i])) {
+            // If it is, increment the answer variable
+            // and clear the set to start a new substring
+            ans++
+            uniqueCharacters.clear()
         }
-        seen.add(char)
+        // Add the current character to the set
+        uniqueCharacters.add(s[i])
     }
-    return true
-}
-
-fun splitString(s: String): List<List<String>> {
-    val substrings = mutableListOf<List<String>>()
-    for (i in 1 until s.length) {
-        for (j in i + 1 until s.length) {
-            val s1 = s.substring(0, i)
-            val s2 = s.substring(i, j)
-            val s3 = s.substring(j)
-            val isValid = isUnique(s1) && isUnique(s2) && isUnique(s3)
-            if (isValid) {
-                substrings.add(listOf(s1,s2,s3))
-            }
-        }
-    }
-    return substrings
+    // Return the answer variable, which gives the
+    // minimum number of substrings required
+    return ans
 }
 
 fun main() {
-    val inputString = "abacdec"
-    val result = splitString(inputString)
-    result.forEach { println(it) }
+    println(solution("abacaba"))
+    println(solution("abacdec"))
+    println(solution("dddd"))
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

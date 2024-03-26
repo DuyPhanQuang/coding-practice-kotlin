@@ -7,7 +7,8 @@ package valid_mountain
  *UP
  we start from left end and initialize variable climb to track the order of element
  now we check strictly increasing order and reach the mountain peak by running a loop.
- if element[climb] < element[climb+1] && climb < n-1 we are on the track of increasing order and keep moving up to the next element
+ if element[climb] < element[climb+1] && climb < n-1 we are on the track of increasing order
+ and keep moving up to the next element
  we stop running a loop if any one of condition become false
  by the end of loop, if peak presented at first of last element we return false
  *DOWN
