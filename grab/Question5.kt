@@ -1,9 +1,18 @@
-package valid_mountain
+package grab
 
-/* solution
+/** condition
  peak can not is first or last and mountain has at least 3 element.
- traversing from left to right
+ * **/
 
+/** idea
+ traversing from left to right.
+ if there is a mountain, we first move up from left end to the peak and then move down from peak
+ to the right end. so one basic idea would be to scan the array from left to right
+ and check strictly increasing and then decreasing order of elements.
+ if can reach the end, it means equal than until the size of given input array, so valid mountain
+**/
+
+/** certainly, break down solution step by step
  *UP
  we start from left end and initialize variable climb to track the order of element
  now we check strictly increasing order and reach the mountain peak by running a loop.
@@ -15,28 +24,25 @@ package valid_mountain
  if peak presented at middle element, we running a loop from this position to check strictly decreasing order.
  if reach the end, input valid mountain, otherwise its not.
 
- // time complexity: 0(n)
- // space complexity: 0(1)
+ // time complexity: 0(n) where n is a size of the input array
+ // space complexity: 0(1) we are using constant extra space
 
-* */
+**/
 fun isValidMountain(arr: Array<Int>): Boolean {
     if (arr.size < 3) {
         return false
     }
-
-    var temp = 0
-
-    while (temp < arr.size-1 && arr[temp] < arr[temp+1]) {
-        temp += 1
+    var climb = 0
+    while (climb < arr.size-1 && arr[climb] < arr[climb+1]) {
+        climb += 1
     }
-    if (temp == 0 || temp == arr.size-1) {
+    if (climb == 0 || climb == arr.size-1) {
         return false
     }
-    while (temp < arr.size-1 && arr[temp]> arr[temp+1]) {
-        temp += 1
+    while (climb < arr.size-1 && arr[climb]> arr[climb+1]) {
+        climb += 1
     }
-
-    return temp == arr.size-1
+    return climb == arr.size-1
 }
 
 fun main() {
